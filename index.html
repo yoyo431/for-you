@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #ffcce0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: radial-gradient(#ffb3c6 1px, transparent 1px);
+      background-size: 40px 40px;
+      position: relative;
+    }
+
+    .envelope {
+      width: 240px;
+      height: 160px;
+      position: relative;
+      background: #ff99cc;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .envelope::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-style: solid;
+      border-width: 0 120px 80px 120px;
+      border-color: transparent transparent #ffb6d1 transparent;
+    }
+
+    .letter {
+      width: 220px;
+      background: white;
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      padding: 12px;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 16px;
+      line-height: 1.5;
+      display: none;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      z-index: 20;
+    }
+
+    .show .letter {
+      display: block;
+      animation: slideUp 0.8s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 8s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    .static-heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ffccd5;
+      transform: rotate(45deg);
+      opacity: 0.2;
+    }
+
+    .static-heart::before,
+    .static-heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ffccd5;
+      border-radius: 50%;
+    }
+
+    .static-heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .static-heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .envelope {
+        width: 260px;
+        height: 180px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .letter {
+        width: 220px;
+        font-size: 16px;
+        padding: 12px;
+      }
+      .envelope::before {
+        border-width: 0 130px 90px 130px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" src="Nghmaty.CoM_mwsy_]a_mady.mp3"></audio>
+
+  <div class="hearts">
+    <!-- Floating hearts -->
+    <script>
+      for (let i = 0; i < 30; i++) {
+        let heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+        heart.style.opacity = Math.random();
+        document.querySelector('.hearts').appendChild(heart);
+      }
+      // Static hearts in background
+      for (let i = 0; i < 25; i++) {
+        let staticHeart = document.createElement('div');
+        staticHeart.className = 'static-heart';
+        staticHeart.style.left = Math.random() * 100 + '%';
+        staticHeart.style.top = Math.random() * 100 + '%';
+        document.querySelector('.hearts').appendChild(staticHeart);
+      }
+    </script>
+  </div>
+
+  <div class="envelope" onclick="openEnvelope()">
+    <div class="letter">
+      حبيبتي، أنا آسف بجد على كل لحظة ضايقتك فيها،<br>
+      مكنتش أقصد أجرحك. أنتي أغلى حاجة عندي،<br>
+      ونفسي نرجع أحسن من الأول.<br>
+      انا اسف يا احلى و اجمل لولو فالدنيا كلها❤️❤️<br>
+      ❤️❤️بحبك.
+    </div>
+  </div>
+
+  <script>
+    function openEnvelope() {
+      const envelope = document.querySelector('.envelope');
+      envelope.classList.add('show');
+      const music = document.getElementById('bg-music');
+      music.play();
+    }
+  </script>
+
+</body>
+</html>
